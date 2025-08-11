@@ -1,0 +1,14 @@
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.5.1
+torchvision==0.20.1
+timm==1.0.19
+transformers==4.47.1
+einops==0.8.1
+openpyxl
+numpy
+pandas
+Pillow
+scikit_learn
+tifffile
+tqdm
+
