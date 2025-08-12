@@ -110,8 +110,8 @@ def train(opt):
     optimizer = optim.AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr=opt.lr, weight_decay=1e-5)
     scheduler = lr_scheduler.CosineAnnealingLR(optimizer, opt.epochs, eta_min=1e-8)
     best_metrics = 0
-    for num_epochs in range(50):
-        scheduler.step()
+    for num_epochs in range(opt.epochs):
+        
         loop = tqdm(train_dataloader, total=len(train_dataloader))
         for imgs, labels, test_input in loop:
             input_id = test_input['input_ids'].squeeze(1).cuda()
@@ -128,6 +128,7 @@ def train(opt):
             total_loss.backward()
             optimizer.step()
             loop.set_description(f'Epoch [{num_epochs}/{opt.epochs}]')
+        scheduler.step()
         val_result = test(model, val_dataloader)
         print(val_result)
         if val_result['AUC'] > best_metrics:
