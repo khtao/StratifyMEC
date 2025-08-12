@@ -130,7 +130,7 @@ def train(opt):
                 optimizer.step()
                 batch = 0
                 loss = []
-            schedulers.step()
+        schedulers.step()
         val_result = test(model, clip_model, val_dataloader)
         print(val_result)
         if best_auc < val_result['AUC']:
